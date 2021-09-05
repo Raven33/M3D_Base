@@ -18,8 +18,10 @@ namespace M3D_ISICG
 
 		~LabWorkManager() { delete _current; }
 
-		// This method
+		// This method draw the content of the menu "Current lab work" (Application).
 		void drawMenu();
+
+		inline int getType() const { return static_cast<int>( _type ); }
 
 		// Initialization.
 		bool init() { return _current->init(); }

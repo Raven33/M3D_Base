@@ -77,7 +77,9 @@ namespace M3D_ISICG
 		SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 
 		std::cout << "-> Create SDL window" << std::endl;
-		_window = SDL_CreateWindow( _title.c_str(),
+		const std::string title = _title + " - Lab work " + std::to_string( _labWorkManager.getType() );
+
+		_window = SDL_CreateWindow( title.c_str(),
 									SDL_WINDOWPOS_UNDEFINED,
 									SDL_WINDOWPOS_UNDEFINED,
 									_width,
@@ -253,6 +255,9 @@ namespace M3D_ISICG
 						_displayLabWorkSettings = true;
 					}
 				}
+
+				const std::string title = _title + " - Lab work " + std::to_string( _labWorkManager.getType() );
+				SDL_SetWindowTitle( _window, title.c_str() );
 
 				ImGui::EndMenu();
 			}
