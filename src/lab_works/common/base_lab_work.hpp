@@ -1,6 +1,7 @@
 #ifndef __BASE_LAB_WORK_HPP__
 #define __BASE_LAB_WORK_HPP__
 
+#include "GL/gl3w.h"
 #include "SDL.h"
 
 namespace M3D_ISICG
@@ -21,6 +22,20 @@ namespace M3D_ISICG
 		virtual void handleEvents( const SDL_Event & p_event ) = 0;
 		// Display user interface.
 		virtual void displayUI() = 0;
+
+		int getWindowWidth() const { return _windowWidth; }
+		int getWindowHeight() const { return _windowHeight; }
+
+		virtual void resize( const int p_width, const int p_height )
+		{
+			_windowWidth  = p_width;
+			_windowHeight = p_height;
+			glViewport( 0, 0, p_width, p_height );
+		}
+
+	  protected:
+		int _windowWidth  = 0;
+		int _windowHeight = 0;
 	};
 } // namespace M3D_ISICG
 

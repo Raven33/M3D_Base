@@ -5,6 +5,7 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_sdl.h"
 #include "utils/gl_utils.hpp"
+#include <chrono>
 #include <iostream>
 
 namespace M3D_ISICG
@@ -15,6 +16,9 @@ namespace M3D_ISICG
 		_initWindow();
 		_initGL();
 		_initUI();
+		_labWorkManager.resize( p_width, p_height );
+		if ( !_labWorkManager.init() )
+			throw std::exception( "Error initaliazing _labWorkManager" );
 	}
 
 	Application::~Application()
@@ -37,9 +41,6 @@ namespace M3D_ISICG
 	int Application::run()
 	{
 		ImGuiIO & io = ImGui::GetIO();
-
-		if ( !_labWorkManager.init() )
-			return EXIT_FAILURE;
 
 		_running = true;
 		while ( _running )
@@ -79,12 +80,13 @@ namespace M3D_ISICG
 		std::cout << "-> Create SDL window" << std::endl;
 		const std::string title = _title + " - Lab work " + std::to_string( _labWorkManager.getType() );
 
-		_window = SDL_CreateWindow( title.c_str(),
-									SDL_WINDOWPOS_UNDEFINED,
-									SDL_WINDOWPOS_UNDEFINED,
-									_width,
-									_height,
-									SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI );
+		_window = SDL_CreateWindow(
+			title.c_str(),
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			_width,
+			_height,
+			SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE );
 
 		if ( _window == nullptr )
 			throw std::exception( SDL_GetError() );
@@ -128,9 +130,6 @@ namespace M3D_ISICG
 		std::cout << "OpenGL Version : " << glGetString( GL_VERSION ) << std::endl;
 		std::cout << "GLSL Version : " << glGetString( GL_SHADING_LANGUAGE_VERSION ) << std::endl;
 		std::cout << "Device : " << glGetString( GL_RENDERER ) << std::endl;
-
-		// Define the viewport dimensions.
-		glViewport( 0, 0, _width, _height );
 
 		std::cout << "Done!" << std::endl;
 	}
@@ -194,6 +193,15 @@ namespace M3D_ISICG
 			{
 				_running = false;
 			}
+			else if ( event.type == SDL_WINDOWEVENT )
+			{
+				if ( event.window.event == SDL_WINDOWEVENT_RESIZED )
+				{
+					_width	= event.window.data1;
+					_height = event.window.data2;
+					_labWorkManager.resize( _width, _height );
+				}
+			}
 		}
 	}
 
@@ -215,6 +223,10 @@ namespace M3D_ISICG
 			if ( ImGui::BeginMenu( "File" ) )
 			{
 				// Exit.
+				if ( ImGui::MenuItem( "Save image" ) )
+				{
+					_screenshot();
+				}
 				if ( ImGui::MenuItem( "Exit" ) )
 				{
 					_running = false;
@@ -278,5 +290,57 @@ namespace M3D_ISICG
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData( ImGui::GetDrawData() );
+	}
+
+	void Application::_screenshot()
+	{
+		try
+		{
+			const long long timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
+											std::chrono::system_clock::now().time_since_epoch() )
+											.count();
+			const std::string screenshotName = "./screenshots/screenshot" + std::to_string( timestamp ) + ".bmp";
+
+			std::cout << "Saving screenshot: " << screenshotName << std::endl;
+
+			unsigned int * pixels = new unsigned int[ _width * _height * 4 ]; // 4 bytes for RGBA
+			glReadPixels( 0, 0, _width, _height, GL_RGBA, GL_UNSIGNED_BYTE, pixels );
+			unsigned int * flippedPixels = new unsigned int[ _width * _height * 4 ]; // 4 bytes for RGBA
+#pragma omp parallel for
+			for ( int i = 0; i < _height; ++i )
+			{
+				for ( int j = 0; j < _width; ++j )
+				{
+					const unsigned int idPixelSrc  = j + ( _height - i - 1 ) * _width;
+					const unsigned int idPixelDest = j + i * _width;
+					flippedPixels[ idPixelDest ]   = pixels[ idPixelSrc ];
+				}
+			}
+
+			SDL_Surface * surf = SDL_CreateRGBSurfaceFrom( flippedPixels, _width, _height, 32, _width * 4,
+#if 0
+															 0xFF000000,
+															 0x00FF0000,
+															 0x0000FF00,
+															 0x000000FF
+#else
+															 0x000000FF,
+															 0x0000FF00,
+															 0x00FF0000,
+															 0xFF000000
+#endif
+			);
+			SDL_SaveBMP( surf, screenshotName.c_str() );
+
+			SDL_FreeSurface( surf );
+			delete[] pixels;
+			delete[] flippedPixels;
+
+			std::cout << "Done!" << std::endl;
+		}
+		catch ( const std::exception & e )
+		{
+			std::cerr << "Cannot save screenshot: " << e.what() << std::endl;
+		}
 	}
 } // namespace M3D_ISICG

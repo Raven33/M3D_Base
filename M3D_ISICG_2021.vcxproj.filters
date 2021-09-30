@@ -26,6 +26,21 @@
     <Filter Include="Source Files\lab_works\lab_work_1\shaders">
       <UniqueIdentifier>{aa1a1120-a788-40d0-9579-2ff60cf1ed63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_2">
+      <UniqueIdentifier>{6fb9621a-8912-451a-b8ad-530d103cd46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_2\shaders">
+      <UniqueIdentifier>{8542e548-76fe-49ae-97a5-9c2985501e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\common">
+      <UniqueIdentifier>{bb968e4a-9faa-4fc3-aa69-e606673cab2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_3">
+      <UniqueIdentifier>{f4b98eb1-f591-4ba3-9904-a9f9b6c9278f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lab_works\lab_work_3\shaders">
+      <UniqueIdentifier>{35e6dbd5-3a1e-4545-a224-b62ee2cf61c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp">
@@ -58,8 +73,17 @@
     <ClCompile Include="src\lab_works\lab_work_1\lab_work_1.cpp">
       <Filter>Source Files\lab_works\lab_work_1</Filter>
     </ClCompile>
-    <ClCompile Include="src\lab_works\lab_work_manager.cpp">
-      <Filter>Source Files\lab_works</Filter>
+    <ClCompile Include="src\lab_works\common\camera.cpp">
+      <Filter>Source Files\lab_works\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\common\lab_work_manager.cpp">
+      <Filter>Source Files\lab_works\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\lab_work_3\lab_work_3.cpp">
+      <Filter>Source Files\lab_works\lab_work_3</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lab_works\lab_work_2\lab_work_2.cpp">
+      <Filter>Source Files\lab_works\lab_work_2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +111,6 @@
     <ClInclude Include="src\define.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\lab_works\base_lab_work.hpp">
-      <Filter>Source Files\lab_works</Filter>
-    </ClInclude>
     <ClInclude Include="src\lab_works\lab_work_1\lab_work_1.hpp">
       <Filter>Source Files\lab_works\lab_work_1</Filter>
     </ClInclude>
@@ -99,8 +120,23 @@
     <ClInclude Include="src\utils\gl_utils.hpp">
       <Filter>Source Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\lab_works\lab_work_manager.hpp">
-      <Filter>Source Files\lab_works</Filter>
+    <ClInclude Include="src\utils\random.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\common\camera.hpp">
+      <Filter>Source Files\lab_works\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\common\lab_work_manager.hpp">
+      <Filter>Source Files\lab_works\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\common\base_lab_work.hpp">
+      <Filter>Source Files\lab_works\common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\lab_work_2\lab_work_2.hpp">
+      <Filter>Source Files\lab_works\lab_work_2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lab_works\lab_work_3\lab_work_3.hpp">
+      <Filter>Source Files\lab_works\lab_work_3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +145,18 @@
     </None>
     <None Include="src\lab_works\lab_work_1\shaders\lw1.vert">
       <Filter>Source Files\lab_works\lab_work_1\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_2\shaders\lw2.vert">
+      <Filter>Source Files\lab_works\lab_work_2\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_2\shaders\lw2.frag">
+      <Filter>Source Files\lab_works\lab_work_2\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_3\shaders\triangle.vert">
+      <Filter>Source Files\lab_works\lab_work_3\shaders</Filter>
+    </None>
+    <None Include="src\lab_works\lab_work_3\shaders\triangle.frag">
+      <Filter>Source Files\lab_works\lab_work_3\shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

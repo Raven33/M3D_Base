@@ -2,7 +2,7 @@
 #define __APPLICATION_HPP__
 
 #include "SDL.h"
-#include "lab_work_manager.hpp"
+#include "common/lab_work_manager.hpp"
 #include <string>
 
 namespace M3D_ISICG
@@ -23,6 +23,8 @@ namespace M3D_ISICG
 		void _handleEvents();
 		void _displayUI();
 
+		void _screenshot();
+
 	  private:
 		// Window data.
 		std::string	  _title;
@@ -32,11 +34,11 @@ namespace M3D_ISICG
 		SDL_GLContext _glContext = nullptr;
 
 		// UI data.
-		bool _displayLabWorkSettings = false;
+		bool _displayLabWorkSettings = true;
 
 		// Settings.
 		bool _running	= false;
-		bool _animation = false;
+		bool _animation = true;
 		bool _vSync		= true;
 
 		LabWorkManager _labWorkManager;

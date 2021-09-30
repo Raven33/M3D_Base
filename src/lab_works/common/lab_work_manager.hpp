@@ -10,7 +10,9 @@ namespace M3D_ISICG
 		// Enum to identify current lab work.
 		enum class TYPE
 		{
-			LAB_WORK_1 = 1
+			LAB_WORK_1 = 1,
+			LAB_WORK_2 = 2,
+			LAB_WORK_3 = 3
 		};
 
 	  public:
@@ -34,7 +36,8 @@ namespace M3D_ISICG
 		// Display user interface.
 		void displayUI() { _current->displayUI(); }
 
-	  public:
+		void resize( const int p_width, const int p_height ) { _current->resize( p_width, p_height ); }
+
 	  private:
 		TYPE		  _type;
 		BaseLabWork * _current = nullptr;

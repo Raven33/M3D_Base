@@ -27,8 +27,11 @@
     <ClCompile Include="lib\imgui\imgui_tables.cpp" />
     <ClCompile Include="lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\lab_works\common\camera.cpp" />
     <ClCompile Include="src\lab_works\lab_work_1\lab_work_1.cpp" />
-    <ClCompile Include="src\lab_works\lab_work_manager.cpp" />
+    <ClCompile Include="src\lab_works\common\lab_work_manager.cpp" />
+    <ClCompile Include="src\lab_works\lab_work_2\lab_work_2.cpp" />
+    <ClCompile Include="src\lab_works\lab_work_3\lab_work_3.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -40,15 +43,23 @@
     <ClInclude Include="lib\imgui\imgui_internal.h" />
     <ClInclude Include="src\application.hpp" />
     <ClInclude Include="src\define.hpp" />
-    <ClInclude Include="src\lab_works\base_lab_work.hpp" />
-    <ClInclude Include="src\lab_works\lab_work_manager.hpp" />
+    <ClInclude Include="src\lab_works\common\base_lab_work.hpp" />
+    <ClInclude Include="src\lab_works\common\camera.hpp" />
+    <ClInclude Include="src\lab_works\common\lab_work_manager.hpp" />
     <ClInclude Include="src\lab_works\lab_work_1\lab_work_1.hpp" />
+    <ClInclude Include="src\lab_works\lab_work_2\lab_work_2.hpp" />
+    <ClInclude Include="src\lab_works\lab_work_3\lab_work_3.hpp" />
     <ClInclude Include="src\utils\gl_utils.hpp" />
+    <ClInclude Include="src\utils\random.hpp" />
     <ClInclude Include="src\utils\read_file.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\lab_works\lab_work_1\shaders\lw1.frag" />
     <None Include="src\lab_works\lab_work_1\shaders\lw1.vert" />
+    <None Include="src\lab_works\lab_work_2\shaders\lw2.frag" />
+    <None Include="src\lab_works\lab_work_2\shaders\lw2.vert" />
+    <None Include="src\lab_works\lab_work_3\shaders\triangle.frag" />
+    <None Include="src\lab_works\lab_work_3\shaders\triangle.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

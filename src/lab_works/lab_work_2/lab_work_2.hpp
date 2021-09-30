@@ -1,5 +1,5 @@
-#ifndef __LAB_WORK_1_HPP__
-#define __LAB_WORK_1_HPP__
+#ifndef __LAB_WORK_2_HPP__
+#define __LAB_WORK_2_HPP__
 
 #include "GL/gl3w.h"
 #include "common/base_lab_work.hpp"
@@ -8,11 +8,11 @@
 
 namespace M3D_ISICG
 {
-	class LabWork1 : public BaseLabWork
+	class LabWork2 : public BaseLabWork
 	{
 	  public:
-		LabWork1() : BaseLabWork() {}
-		~LabWork1();
+		LabWork2() : BaseLabWork() {}
+		~LabWork2();
 
 		bool init() override;
 		void animate( const float p_deltaTime ) override;
@@ -36,4 +36,4 @@ namespace M3D_ISICG
 	};
 } // namespace M3D_ISICG
 
-#endif // __LAB_WORK_1_HPP__
+#endif // __LAB_WORK_2_HPP__
